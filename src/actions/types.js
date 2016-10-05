@@ -1,0 +1,2 @@
+export const FETCH_STOCKS = 'FETCH_STOCKS';
+export const UPDATE_STOCKS = 'UPDATE_STOCKS';
