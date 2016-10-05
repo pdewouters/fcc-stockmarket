@@ -46,19 +46,30 @@ class Chart extends Component {
   }
 
   componentDidMount() {
+    this.getChartConfig();
+  }
+
+  getChartConfig(){
+
+    this.highchartsModules();
     this.stockOptions.series = Object.keys(this.props.data).map( key => {
       return this.props.data[key];
     });
-    this.highchartsModules();
     this.chart = new HighCharts['stockChart' || "Chart"](
       'chart-container',
       this.stockOptions
     );
-  }
-
+}
   componentWillReceiveProps(newProps) {
-    console.log(newProps)
+    if (Object.keys(this.props.data).length === Object.keys(newProps.data).length) {
+      return;
+    }
+    while(this.chart.series.length > 0)
+      this.chart.series[0].remove(true);
 
+      Object.keys(newProps.data).map( key => {
+        return this.chart.addSeries(newProps.data[key]);
+      });
   }
 
   componentWillUnmount() {

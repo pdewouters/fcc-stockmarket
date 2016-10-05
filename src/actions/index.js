@@ -28,3 +28,8 @@ import {
     const stocksRef = firebase.database().ref('stocks');
     return dispatch => stocksRef.push(stock);
   }
+
+  export function deleteStock(key) {
+    const stocksRef = firebase.database().ref(`stocks/${key}`);
+    return dispatch => stocksRef.remove();
+  }
